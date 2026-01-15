@@ -42,7 +42,19 @@ export default function ManageProjects() {
   const loadProjects = async () => {
     try {
       const data = await getProjects();
-      setProjects(data);
+      // Filter and map data to ensure all required fields exist
+      const projects = data.map((doc: any) => ({
+        id: doc.id || '',
+        name: doc.name || 'Unnamed Project',
+        category: doc.category || 'Other',
+        price: doc.price || 0,
+        discountedPrice: doc.discountedPrice,
+        views: doc.views || 0,
+        requests: doc.requests || 0,
+        createdAt: doc.createdAt || new Date().toISOString(),
+        ...doc,
+      }));
+      setProjects(projects);
     } catch (error) {
       console.error('Error loading projects:', error);
       setMessage('Failed to load projects');
