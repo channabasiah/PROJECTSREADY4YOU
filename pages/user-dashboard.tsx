@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
 import { FiArrowLeft, FiDownload, FiCheck, FiClock, FiX, FiUser, FiMail, FiPhone, FiBook } from 'react-icons/fi';
 import { useAuthStore } from '@/lib/store';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import { getRequestsByUserEmail, getUserProfile } from '@/lib/db';
 
 interface Request {
@@ -82,6 +83,11 @@ export default function UserDashboard() {
   return (
     <div className="min-h-screen bg-[#0b0e27] text-white pt-20">
       <div className="w-full px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
+        {/* Breadcrumbs */}
+        <div className="mb-4 sm:mb-6">
+          <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'User Dashboard' }]} />
+        </div>
+
         {/* Navigation Tabs */}
         <div className="flex gap-2 mb-8 overflow-x-auto pb-2">
           {[

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
 import { FiFilter, FiSearch, FiPlay } from 'react-icons/fi';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import RequestModal from '@/components/RequestModal';
 import { getProjects, incrementProjectViews } from '@/lib/db';
 
@@ -102,6 +103,11 @@ const Projects = () => {
   return (
     <div className="min-h-screen w-full bg-gradient-to-br from-[#0b0e27] via-[#151a36] to-[#0b0e27] py-8 sm:py-12 md:py-16">
       <div className="w-full px-4 sm:px-6 md:px-8 lg:px-10">
+        {/* Breadcrumbs */}
+        <div className="mb-6 sm:mb-8">
+          <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Projects' }]} />
+        </div>
+
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}

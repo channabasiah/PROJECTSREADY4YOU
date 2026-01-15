@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
 import { FiEdit2, FiTrash2, FiX, FiAlertCircle } from 'react-icons/fi';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import { getProjects, updateProject, deleteProject } from '@/lib/db';
 import { useAuthStore } from '@/lib/store';
 
@@ -128,6 +129,11 @@ export default function ManageProjects() {
   return (
     <div className="min-h-screen bg-[#0b0e27] text-white p-4 sm:p-8">
       <div className="max-w-7xl mx-auto">
+        {/* Breadcrumbs */}
+        <div className="mb-4 sm:mb-6">
+          <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Admin', href: '/admin' }, { label: 'Manage Projects' }]} />
+        </div>
+
         {/* Header */}
         <h1 className="text-3xl sm:text-4xl font-bold mb-2 text-neon-cyan">Manage Projects</h1>
         <p className="text-text-light mb-8">Edit or delete your projects</p>

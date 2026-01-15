@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import { addProject } from '@/lib/db';
 import { useRouter } from 'next/router';
 
@@ -70,6 +71,11 @@ const AddProject = () => {
   return (
     <div className="min-h-screen bg-[#0b0e27] py-8">
       <div className="max-w-3xl mx-auto px-4">
+        {/* Breadcrumbs */}
+        <div className="mb-4 sm:mb-6">
+          <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Admin', href: '/admin' }, { label: 'Add Project' }]} />
+        </div>
+
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}

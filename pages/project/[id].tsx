@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
 import { FiArrowLeft, FiPlay, FiChevronDown, FiChevronUp, FiEdit2, FiTrash2, FiX } from 'react-icons/fi';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import RequestModal from '@/components/RequestModal';
 import { getProjectById, incrementProjectViews, deleteProject, updateProject } from '@/lib/db';
 import { useAuthStore } from '@/lib/store';
@@ -152,6 +153,11 @@ const ProjectDetails = () => {
   return (
     <div className="min-h-screen w-full bg-gradient-to-br from-[#0b0e27] via-[#151a36] to-[#0b0e27] py-4 sm:py-6">
       <div className="w-full px-2 sm:px-3 md:px-4 lg:px-6">
+        {/* Breadcrumbs */}
+        <div className="mb-3 sm:mb-4">
+          <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Projects', href: '/projects' }, { label: project?.name || 'Project' }]} />
+        </div>
+
         {/* Back Button */}
         <button
           onClick={() => router.back()}

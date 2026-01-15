@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { useAuthStore } from '@/lib/store';
 import { motion } from 'framer-motion';
 import { FiBarChart, FiUsers, FiDownload, FiDollarSign, FiPlus, FiSettings, FiCheck, FiX, FiMail } from 'react-icons/fi';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import { getAnalytics, getRequests, getProjects, updateRequest } from '@/lib/db';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
@@ -276,6 +277,11 @@ const Admin = () => {
   return (
     <div className="min-h-screen w-full bg-[#0b0e27]">
       <div className="w-full px-4 sm:px-6 md:px-8 lg:px-10 py-6">
+        {/* Breadcrumbs */}
+        <div className="mb-4 sm:mb-6">
+          <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Admin', href: '/admin' }, { label: 'Dashboard' }]} />
+        </div>
+
         {/* Tabs */}
         <div className="flex gap-2 sm:gap-4 mb-8 overflow-x-auto pb-2">
           {tabs.map((tab) => {

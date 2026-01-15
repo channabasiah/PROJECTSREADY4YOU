@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
 import { FiArrowLeft, FiSave, FiCheck, FiX } from 'react-icons/fi';
 import { useAuthStore } from '@/lib/store';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import { getEmailTemplate, saveEmailTemplate, getDefaultEmailTemplate } from '@/lib/db';
 
 const EmailSettings = () => {
@@ -111,6 +112,11 @@ const EmailSettings = () => {
   return (
     <div className="min-h-screen w-full bg-gradient-to-br from-[#0b0e27] via-[#151a36] to-[#0b0e27] py-8 sm:py-12">
       <div className="w-full px-4 sm:px-6 md:px-8 max-w-4xl mx-auto">
+        {/* Breadcrumbs */}
+        <div className="mb-4 sm:mb-6">
+          <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Admin', href: '/admin' }, { label: 'Email Settings' }]} />
+        </div>
+
         {/* Back Button */}
         <button
           onClick={() => router.back()}

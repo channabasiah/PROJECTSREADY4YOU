@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useAuthStore } from '@/lib/store';
 import { useRouter } from 'next/router';
 import { getRequestsByUserEmail, getProjectById } from '@/lib/db';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import Link from 'next/link';
 
 interface Request {
@@ -125,6 +126,11 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen w-full bg-[#0f0f1e] pt-20 pb-16 px-4 sm:px-6 md:px-8 lg:px-10">
       <div className="w-full">
+        {/* Breadcrumbs */}
+        <div className="mb-4 sm:mb-6">
+          <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Dashboard' }]} />
+        </div>
+
         {/* Header */}
         <div className="mb-6 sm:mb-8 md:mb-10">
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2">Welcome Back, {user.displayName || user.email?.split('@')[0]}!</h1>
