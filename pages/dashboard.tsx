@@ -41,7 +41,23 @@ export default function Dashboard() {
     try {
       setLoadingRequests(true);
       const userRequests = await getRequestsByUserEmail(user?.email || '');
-      setRequests(userRequests as Request[]);
+      // Map to ensure all required fields exist with defaults
+      const mappedRequests = userRequests.map((req: any) => ({
+        requestId: req.requestId || req.id || '',
+        projectId: req.projectId || '',
+        projectName: req.projectName || 'Unknown Project',
+        projectPrice: req.projectPrice || 0,
+        userName: req.userName || '',
+        userEmail: req.userEmail || user?.email || '',
+        userWhatsApp: req.userWhatsApp || '',
+        paymentStatus: req.paymentStatus || 'pending',
+        downloadEnabled: req.downloadEnabled || false,
+        transactionId: req.transactionId,
+        createdAt: req.createdAt || new Date().toISOString(),
+        verifiedAt: req.verifiedAt,
+        ...req,
+      }));
+      setRequests(mappedRequests);
     } catch (error) {
       console.error('Error fetching requests:', error);
     } finally {
