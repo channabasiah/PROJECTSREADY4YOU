@@ -19,8 +19,8 @@ const Projects = () => {
   const categories = ['All', 'Web Development', 'Mobile Apps', 'Machine Learning', 'DevOps'];
 
   // Helper function to convert YouTube URL to embed URL
-  const getYouTubeEmbedUrl = (url: string) => {
-    if (!url) return null;
+  const getYouTubeEmbedUrl = (url: string | null | undefined): string => {
+    if (!url) return '';
     
     let videoId = '';
     
