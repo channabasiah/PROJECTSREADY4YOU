@@ -66,7 +66,13 @@ export default function UserDashboard() {
         // Load user profile
         const userProfile = await getUserProfile(user.uid);
         if (userProfile) {
-          setProfile(userProfile);
+          const mappedProfile: UserProfile = {
+            name: userProfile.name || '',
+            email: userProfile.email || user?.email || '',
+            phone: userProfile.phone || '',
+            collegeName: userProfile.collegeName || '',
+          };
+          setProfile(mappedProfile);
         }
       }
     } catch (error) {
