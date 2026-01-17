@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { db, adminAuth } from '@/lib/firebase-admin';
+import { db } from '@/lib/firebase';
 import { collection, addDoc, getDoc, doc, updateDoc } from 'firebase/firestore';
 
 export default async function handler(
@@ -17,7 +17,7 @@ export default async function handler(
       return res.status(400).json({ error: 'Missing request data' });
     }
 
-    // Create the request in Firestore (this will use Admin SDK which bypasses rules)
+    // Create the request in Firestore
     const docRef = await addDoc(collection(db, 'requests'), {
       ...requestData,
       createdAt: new Date().toISOString(),
