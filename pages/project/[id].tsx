@@ -55,6 +55,14 @@ const ProjectDetails = () => {
     return url;
   };
 
+  // Toggle section expansion
+  const toggleSection = (section: string) => {
+    setExpandedSections((prev) => ({
+      ...prev,
+      [section]: !prev[section as keyof typeof prev],
+    }));
+  };
+
   const handleDeleteProject = async () => {
     if (!isAdmin) return;
 
