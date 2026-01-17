@@ -68,6 +68,11 @@ const UserProfile = () => {
 
     setSaving(true);
     try {
+      if (!user?.uid) {
+        setMessage('✗ User not authenticated');
+        setSaving(false);
+        return;
+      }
       await saveUserProfile(user.uid, {
         ...profileData,
         profileCompleted: true,
