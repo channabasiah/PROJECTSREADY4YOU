@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
 import { FiX, FiAlertCircle } from 'react-icons/fi';
 import { useAuthStore } from '@/lib/store';
-import { getUserProfile, isProfileComplete } from '@/lib/db';
+import { addRequest, updateProjectStats, getUserProfile, isProfileComplete } from '@/lib/db';
 
 interface RequestModalProps {
   isOpen: boolean;
@@ -108,19 +108,11 @@ const RequestModal: React.FC<RequestModalProps> = ({
 
       console.log('Request data to send:', requestData); // Debug log
 
-      // Use API route to create request (uses Admin SDK, bypasses security rules)
-      const response = await fetch('/api/create-request', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ requestData }),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to create request');
-      }
-
-      const result = await response.json();
+      // Create request directly on client
+      await addRequest(requestData);
+      
+      // Update project stats (non-blocking, errors are ignored)
+      updateProjectStats(projectId, 'requests', 1);
 
       setRequestId(newRequestId);
       setSuccess(true);

@@ -350,8 +350,8 @@ export const updateProjectStats = async (projectId: string, field: string, incre
       });
     }
   } catch (error) {
-    console.error('Error updating project stats:', error);
-    throw error;
+    console.error('Error updating project stats (non-blocking):', error);
+    // Don't throw - this is non-critical
   }
 };
 
