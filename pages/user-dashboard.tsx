@@ -46,7 +46,22 @@ export default function UserDashboard() {
       if (user?.email) {
         // Load user's requests
         const userRequests = await getRequestsByUserEmail(user.email);
-        setRequests(userRequests);
+        // Map to ensure all required fields exist with defaults
+        const mappedRequests = userRequests.map((req: any) => ({
+          id: req.id || '',
+          requestId: req.requestId || req.id || '',
+          projectId: req.projectId || '',
+          projectName: req.projectName || 'Unknown Project',
+          amount: req.amount || 0,
+          paymentStatus: req.paymentStatus || 'pending',
+          userName: req.userName || '',
+          userEmail: req.userEmail || user?.email || '',
+          userWhatsApp: req.userWhatsApp || '',
+          downloadEnabled: req.downloadEnabled || false,
+          createdAt: req.createdAt || new Date().toISOString(),
+          ...req,
+        }));
+        setRequests(mappedRequests);
 
         // Load user profile
         const userProfile = await getUserProfile(user.uid);
