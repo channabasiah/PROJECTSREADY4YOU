@@ -88,21 +88,21 @@ const Home = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="w-full py-16 sm:py-20 md:py-24 bg-gradient-to-r from-neon-cyan to-neon-green bg-opacity-10">
+      <section className="w-full py-16 sm:py-20 md:py-24 bg-gradient-to-br from-[#0a1628] via-[#1a0f3a] to-[#0f1b2e] border-t border-b border-neon-cyan border-opacity-30">
         <div className="w-full px-4 sm:px-6 md:px-8 lg:px-10 max-w-2xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 neon-glow">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 sm:mb-6 text-white drop-shadow-lg" style={{textShadow: '0 0 30px rgba(0, 217, 255, 0.6), 0 0 60px rgba(2, 254, 136, 0.3)'}}>
               Ready to Get Started?
             </h2>
-            <p className="text-text-light mb-8 text-lg">
+            <p className="text-white mb-8 text-lg sm:text-xl drop-shadow-md" style={{textShadow: '0 2px 4px rgba(0, 0, 0, 0.8)'}}>
               Browse our collection of production-ready projects and download them today!
             </p>
             <a href="/projects">
-              <button className="px-8 py-4 bg-gradient-to-r from-neon-cyan to-neon-green text-black font-bold rounded-lg hover:shadow-neon-glow transition-all transform hover:scale-105">
+              <button className="px-8 py-4 bg-gradient-to-r from-neon-cyan to-neon-green text-black font-bold rounded-lg hover:shadow-neon-glow transition-all transform hover:scale-105 text-base sm:text-lg">
                 Explore Projects Now →
               </button>
             </a>

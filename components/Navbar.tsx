@@ -5,11 +5,14 @@ import { useAuthStore } from '@/lib/store';
 import { auth } from '@/lib/firebase';
 import { signOut } from 'firebase/auth';
 import { FiMenu, FiX, FiLogOut } from 'react-icons/fi';
+import { useRouter } from 'next/router';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
   const user = useAuthStore((state) => state.user);
+  const router = useRouter();
+  const pathname = router.pathname || '';
 
   const handleLogout = async () => {
     try {
@@ -82,18 +85,21 @@ const Navbar = () => {
                 </div>
               </>
             ) : (
-              <div className="flex items-center gap-3">
-                <Link href="/login">
-                  <button className="px-6 py-2 text-blue-600 font-bold border-2 border-blue-600 rounded-lg hover:bg-blue-600 hover:text-white transition-all">
-                    Login
-                  </button>
-                </Link>
-                <Link href="/signup">
-                  <button className="px-6 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition-all">
-                    Sign Up
-                  </button>
-                </Link>
-              </div>
+              // Do not show auth links when already on auth pages
+              pathname === '/login' || pathname === '/signup' ? null : (
+                <div className="flex items-center gap-3">
+                  <Link href="/login">
+                    <button className="px-6 py-2 text-blue-600 font-bold border-2 border-blue-600 rounded-lg hover:bg-blue-600 hover:text-white transition-all">
+                      Login
+                    </button>
+                  </Link>
+                  <Link href="/signup">
+                    <button className="px-6 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition-all">
+                      Sign Up
+                    </button>
+                  </Link>
+                </div>
+              )
             )}
           </div>
 
@@ -114,12 +120,12 @@ const Navbar = () => {
           animate={{ opacity: 1, y: 0 }}
           className="md:hidden bg-[#1a1a2e] border-t border-[#2d3748] p-4 space-y-4"
         >
-          <Link href="/projects" className="block text-text-light hover:text-primary transition-colors">
+          <Link href="/projects" onClick={() => setIsMenuOpen(false)} className="block text-text-light hover:text-primary transition-colors">
             Projects
           </Link>
           {user ? (
             <>
-              <Link href="/user-dashboard" className="block text-text-light hover:text-primary transition-colors">
+              <Link href="/user-dashboard" onClick={() => setIsMenuOpen(false)} className="block text-text-light hover:text-primary transition-colors">
                 Dashboard
               </Link>
               <div className="border-t border-[#2d3748] pt-4">
@@ -127,12 +133,15 @@ const Navbar = () => {
                   Welcome back, {user.displayName || user.email}! 👋
                 </p>
                 {user.email?.includes('admin') && (
-                  <Link href="/admin" className="block text-text-light hover:text-primary transition-colors mb-2">
+                  <Link href="/admin" onClick={() => setIsMenuOpen(false)} className="block text-text-light hover:text-primary transition-colors mb-2">
                     Admin Panel
                   </Link>
                 )}
                 <button
-                  onClick={handleLogout}
+                  onClick={() => {
+                    handleLogout();
+                    setIsMenuOpen(false);
+                  }}
                   className="w-full flex items-center gap-2 text-left text-red-500 hover:text-red-400 transition-colors"
                 >
                   <FiLogOut size={16} />
@@ -141,18 +150,21 @@ const Navbar = () => {
               </div>
             </>
           ) : (
-            <div className="flex flex-col gap-3">
-              <Link href="/login">
-                <button className="w-full px-6 py-2 text-blue-600 font-bold border-2 border-blue-600 rounded-lg hover:bg-blue-600 hover:text-white transition-all">
-                  Login
-                </button>
-              </Link>
-              <Link href="/signup">
-                <button className="w-full px-6 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition-all">
-                  Sign Up
-                </button>
-              </Link>
-            </div>
+            // Hide auth links in mobile menu when already on auth pages
+            pathname === '/login' || pathname === '/signup' ? null : (
+              <div className="flex flex-col gap-3">
+                <Link href="/login" onClick={() => setIsMenuOpen(false)}>
+                  <button className="w-full px-6 py-2 text-blue-600 font-bold border-2 border-blue-600 rounded-lg hover:bg-blue-600 hover:text-white transition-all">
+                    Login
+                  </button>
+                </Link>
+                <Link href="/signup" onClick={() => setIsMenuOpen(false)}>
+                  <button className="w-full px-6 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition-all">
+                    Sign Up
+                  </button>
+                </Link>
+              </div>
+            )
           )}
         </motion.div>
       )}

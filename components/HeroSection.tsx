@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 const HeroSection = () => {
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-[#0b0e27] via-[#151a36] to-[#0b0e27] overflow-hidden">
+    <div className="relative min-h-screen bg-gradient-to-br from-[#071129] via-[#062532] to-[#071129] overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute top-20 left-10 w-72 h-72 bg-neon-cyan rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
       <div className="absolute top-40 right-10 w-72 h-72 bg-neon-green rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
@@ -37,9 +37,9 @@ const HeroSection = () => {
               <input
                 type="text"
                 placeholder="Search projects..."
-                className="w-full px-6 py-4 bg-[#151a36] border-2 border-neon-cyan rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-neon-green transition-all"
+                className="w-full px-6 pr-14 py-4 bg-[#151a36] border-2 border-neon-cyan rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-neon-green transition-all"
               />
-              <button className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-neon-cyan to-neon-green text-black px-4 py-2 rounded-lg hover:shadow-lg transition-all">
+              <button className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-neon-cyan to-neon-green text-black px-3 py-2 rounded-lg hover:shadow-lg transition-all">
                 <FiSearch size={20} />
               </button>
             </div>
